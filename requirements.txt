@@ -1,5 +1,5 @@
 git+https://github.com/alercebroker/atlas_stamp_classifier.git@main
-apf_base==1.0.9
+apf_base==1.0.10
 astropy
 pandas
 # Fixed versions to prevent clashes with tensorflow
