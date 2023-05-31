@@ -13,13 +13,14 @@ from .base import BaseStrategy
 
 
 class ATLASStrategy(BaseStrategy):
-    FIELDS = ["candid", "mjd"]
+    FIELDS = ["candid", "mjd", "ra", "dec"]
     HEADER_FIELDS = ["FILTER", "AIRMASS", "SEEING", "SUNELONG", "MANGLE"]
 
     def __init__(self):
         self.model = AtlasStampClassifier()
         super().__init__("atlas_stamp_classifier", "1.0.0")
 
+    # UNUSED: NOW GETTING RA AND DEC FROM ALERT ITSELF
     @staticmethod
     def _extract_ra_dec(header: dict) -> Tuple[float, float]:
         """Extracts right ascension and declination of the image center based on FITS header.
@@ -99,7 +100,7 @@ class ATLASStrategy(BaseStrategy):
         for field in self.HEADER_FIELDS:
             metadata.append(header[field])
 
-        metadata.extend(self._extract_ra_dec(header))
+        # metadata.extend(self._extract_ra_dec(header))
         return im, metadata
 
     def predict(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -149,5 +150,5 @@ class ATLASStrategy(BaseStrategy):
         return pd.DataFrame(
             data=data,
             index=index,
-            columns=self.FIELDS + ["red", "diff"] + self.HEADER_FIELDS + ["ra", "dec"],
+            columns=self.FIELDS + ["red", "diff"] + self.HEADER_FIELDS,
         ).sort_values("mjd", ascending=True)
