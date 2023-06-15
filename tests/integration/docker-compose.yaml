@@ -17,5 +17,6 @@ services:
       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_ENABLE_KRAFT=no                                       # https://stackoverflow.com/questions/76136447/kafka-cfg-listeners-must-include-a-listener-for-controller
     depends_on:
       - zookeeper
