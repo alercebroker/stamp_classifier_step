@@ -109,3 +109,36 @@ To install the repository specific packages run:
 ```bash
 pip install -r requirements.txt
 ```
+
+### Use Poetry for local env
+The project uses poetry with two groups, ztf and atlas.
+
+#### Running the project
+
+##### Use Poetry ATLAS
+To use ATLAS env you have to explicitly use python 3.8 env:
+- `poetry env use $(which python3.8)`
+Then install ztf packages.
+- `poetry install --with atlas -E atlas`
+After this, commands can be run with
+- `poetry run COMMAND`
+- 
+##### Use Poetry ZTF
+To use ZTF env you have to explicitly use python 3.7 env:
+- `poetry env use $(which python3.7)`
+Then install ztf packages.
+- `poetry install --with ztf -E ztf`
+After this, commands can be run with
+- `poetry run COMMAND`
+
+#### Adding/Changing packages
+
+##### Modify Atlas Environment
+IT's necesary to add the package to the main and specific group
+- `poetry add --optional PACKAGE=="*"`
+- `poetry add -G atlas --optional --python ~=3.8.0 PACKAGE==VERSION`
+
+##### Modify Atlas Environment
+IT's necesary to add the package to the main and specific group
+- `poetry add --optional PACKAGE=="*"`
+- `poetry add -G ztf --optional --python ~=3.7.0 PACKAGE==VERSION`
